@@ -17,7 +17,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
-// Gallery Tabs Functionality
+// Gallery Tabs Functionality - Simplified for single "All" button
 const galleryTabBtns = document.querySelectorAll('.gallery-tab-btn');
 const galleryItems = document.querySelectorAll('.gallery-item');
 
@@ -28,15 +28,17 @@ galleryTabBtns.forEach(btn => {
         // Add active class to clicked button
         btn.classList.add('active');
         
-        const category = btn.getAttribute('data-category');
-        
+        // Since we only have "all" category now, show all items
         galleryItems.forEach(item => {
-            if (category === 'all' || item.getAttribute('data-category') === category) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
+            item.style.display = 'block';
         });
+    });
+});
+
+// Initialize gallery to show all items
+window.addEventListener('load', () => {
+    galleryItems.forEach(item => {
+        item.style.display = 'block';
     });
 });
 
