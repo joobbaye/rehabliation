@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife - Transform Your Body, Transform Your Life</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 求人セクションのスタイル */
+        .recruitment {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .recruitment-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .recruitment-hero {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .recruitment-hero h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .recruitment-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .recruitment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .recruitment-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid var(--primary);
+        }
+
+        .recruitment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .recruitment-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .recruitment-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .recruitment-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .recruitment-card ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .recruitment-card li {
+            margin-bottom: 10px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .recruitment-card li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+
+        .recruitment-card .note {
+            font-style: italic;
+            color: #666;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .recruitment-card .highlight {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .recruitment-image-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .recruitment-image-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            height: 250px;
+        }
+
+        .recruitment-image-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .recruitment-image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .recruitment-image-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .recruitment-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .recruitment-image-card:hover .recruitment-image-overlay {
+            transform: translateY(0);
+        }
+
+        .recruitment-footer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .recruitment-contact, .recruitment-summary {
+            padding: 20px;
+        }
+
+        .recruitment-contact h3, .recruitment-summary h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .recruitment-contact h3::after, .recruitment-summary h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .recruitment-contact a {
+            color: var(--primary);
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .recruitment-contact a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .recruitment-summary ul {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+
+        .recruitment-summary li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .recruitment-summary li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 992px) {
+            .recruitment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .recruitment-footer {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .recruitment-hero h3 {
+                font-size: 1.8rem;
+            }
+            
+            .recruitment-hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .recruitment-card {
+                padding: 20px;
+            }
+            
+            .recruitment-footer {
+                padding: 20px;
+            }
+            
+            .recruitment-hero {
+                padding: 30px 20px;
+            }
+            
+            .recruitment-hero h3 {
+                font-size: 1.6rem;
+            }
+            
+            .recruitment-image-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 既存のCSS変数を再利用 */
+        :root {
+            --primary: #007bff;
+            --secondary: #4ecdc4;
+            --dark: #292f36;
+            --light: #f7fff7;
+            --accent: #ffe66d;
+        }
+    </style>
+</head>
+<body>
+    <!-- 既存のコードはそのまま -->
+
+    <!-- 求人セクション -->
+    <section class="recruitment" id="recruitment">
+        <div class="container">
+            <div class="section-title">
+                <!--<h2>求人</h2>-->
+            </div>
+            <div class="recruitment-content">
+                <div class="recruitment-hero">
+                    <h3>全国でも珍しい"筋トレ推奨型"の介護職</h3>
+                    <p>勤務時間中にトレーニングOK！プロテイン補助あり！<br>
+                    「筋肉で介護を支える」新しいスタイルの求人です！</p>
+                </div>
+                
+                <!-- ボディワーカー画像セクション -->
+                <div class="recruitment-image-section">
+                    <div class="recruitment-image-card">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1330&q=80" alt="トレーニング中のスタッフ">
+                        <div class="recruitment-image-overlay">
+                            <h4>トレーニング環境</h4>
+                            <p>充実した設備で仕事中にもトレーニング可能</p>
+                        </div>
+                    </div>
+                    <div class="recruitment-image-card">
+                        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="チームワーク">
+                        <div class="recruitment-image-overlay">
+                            <h4>チームワーク</h4>
+                            <p>仲間と一緒に成長できる環境</p>
+                        </div>
+                    </div>
+                    <div class="recruitment-image-card">
+                        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="プロテイン補助">
+                        <div class="recruitment-image-overlay">
+                            <h4>栄養サポート</h4>
+                            <p>月1万円分のプロテイン補助あり</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recruitment-grid">
+                    <div class="recruitment-card">
+                        <div class="recruitment-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>仕事内容</h3>
+                        <ul>
+                            <li>利用者さまの介助（移乗、歩行、食事など）</li>
+                            <li>リハビリ・運動補助</li>
+                            <li>見守りやレクリエーション補助</li>
+                            <li>記録・環境整備など</li>
+                        </ul>
+                        <p class="note">※無理のない介助体制で、筋力を活かした支援ができます。<br>
+                        ※筋トレで培った「パワー・体力・笑顔」を存分に発揮してください。</p>
+                    </div>
+                    
+                    <div class="recruitment-card">
+                        <div class="recruitment-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h3>求める人材</h3>
+                        <ul>
+                            <li>筋肉を愛してやまない方</li>
+                            <li>人を支えることにも情熱を持てる方</li>
+                            <li>体を鍛えながら仕事がしたい方</li>
+                            <li>ボディメイク・コンテスト出場を目指している方</li>
+                            <li>「筋肉は裏切らない」と信じている方</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="recruitment-card">
+                        <div class="recruitment-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3>アピールポイント</h3>
+                        <p class="highlight">福利厚生が"ガチすぎる"！</p>
+                        <ul>
+                            <li>月1万円分のプロテイン購入補助あり！</li>
+                            <li>勤務時間中に筋トレOK（1日2時間まで）！</li>
+                            <li>ボディビル・フィジーク大会出場を全面応援！（大会出場時は特別休暇相談OK）</li>
+                            <li>施設SNSで「マッチョの日常」紹介予定！</li>
+                            <li>職員同士の筋トレコミュニティあり！</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="recruitment-card">
+                        <div class="recruitment-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>勤務時間・休日</h3>
+                        <p><strong>勤務時間</strong></p>
+                        <ul>
+                            <li>9：00～18：00（休憩60分）</li>
+                            <li>うち 6時間勤務＋2時間はトレーニング時間として自由にジム利用OK！</li>
+                            <li>日勤のみ／夜勤なしも可</li>
+                            <li>残業ほとんどなし</li>
+                        </ul>
+                        <p class="note">「介護＋筋肉＝最高のチームワーク」<br>
+                        利用者さまの支援だけでなく、自分の身体も鍛えながら働ける新しい働き方を提案します。</p>
+                    </div>
+                    
+                    <div class="recruitment-card">
+                        <div class="recruitment-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>勤務地</h3>
+                        <p><strong>勤務地所在地</strong><br>
+                        〒221-0864 神奈川県 横浜市 神奈川区 菅田町656-1</p>
+                        <p><strong>アクセス</strong><br>
+                        最寄りのJR横浜線鴨居駅からバスで10分です。西菅田団地のバス停から徒歩5分です。JR横浜駅から直通のバスもあります。</p>
+                    </div>
+                    
+                    <div class="recruitment-card">
+                        <div class="recruitment-icon">
+                            <i class="fas fa-yen-sign"></i>
+                        </div>
+                        <h3>給与・待遇</h3>
+                        <p><strong>給与</strong><br>
+                        250,000円 - 400,000円 月給</p>
+                        <ul>
+                            <li>昇給・賞与あり（前年度実績あり）昇給年1回、賞与年2回（7月、12月）</li>
+                            <li>プロテイン手当（上限月10,000円）</li>
+                            <li>通勤手当支給（上限月30,000円）</li>
+                            <li>住宅手当支給（条件により月10,000円支給）</li>
+                            <li>皆勤手当支給（条件により月5,000円支給）</li>
+                        </ul>
+                        <p><strong>試用期間</strong><br>
+                        試用期間：3か月（同条件）</p>
+                    </div>
+                </div>
+                
+                <div class="recruitment-footer">
+                    <div class="recruitment-contact">
+                        <h3>お問い合わせ</h3>
+                        <p>詳しくはHPをご覧ください。<br>
+                        <a href="https://hc-mugi.com/" target="_blank">https://hc-mugi.com/</a></p>
+                        <p><strong>代表電話番号</strong><br>
+                        +81-45-478-3777</p>
+						 <p><strong>EMAIL:</strong> rehabili@hc-mugi.com</p>
+                    </div>
+                    
+                    <div class="recruitment-summary">
+                        <h3>雇用情報</h3>
+                        <ul>
+                            <li><strong>雇用形態:</strong> 正社員</li>
+                            <li><strong>平均所定労働時間:</strong> 169時間/月</li>
+                            <li><strong>福利厚生:</strong> 社会保険完備、各種手当、研修制度、資格取得支援</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 既存の連絡先セクションなど -->
+</body>
+</html>
